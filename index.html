@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tavishi Wealth · Centred, refined preview</title>
+<title>tavishiwealth</title>
 <meta name="description" content="Tavishi Wealth Private Limited, Chandigarh. Private, pure, global portfolios for a limited number of families and business owners.">
 <meta name="theme-color" content="#3F0A13">
 <style>
@@ -992,6 +992,33 @@ html.is-refined #constellation,html.is-refined a[href="#wealth-constellation"]{d
 .founder--refined .founder-grid:not(:has(.portrait)){grid-template-columns:minmax(0,1fr) !important;grid-template-areas:"head" "story" !important}
 
 .footer--refined .lockup-tagline{contain:inline-size;display:flex;justify-content:center;white-space:nowrap}
+
+/* Insights library: title, one-line summary, then subject and date, so titles keep the full width on a phone */
+.ins-item .acc-btn{grid-template-columns:minmax(0,1fr) 14px;grid-template-areas:"title ico" "sum ico" "meta ico";gap:6px var(--space-4);padding-block:var(--space-5)}
+.ins-item .acc-title{grid-area:title}
+.ins-item .acc-sum{grid-area:sum;font-family:var(--font-text);font-weight:400;font-size:var(--fs-body);line-height:1.55;color:var(--ink-body)}
+.ins-item .acc-meta{grid-area:meta;text-align:left;margin-top:2px}
+.ins-item .acc-ico{grid-area:ico}
+/* Insight comparison, boxed. Phone: one box per question, the four routes in a 2 x 2 grid. Desktop: a fully ruled table. */
+.ins-cmp{margin-bottom:var(--space-5)}
+.cmpq-table{width:100%;table-layout:fixed;border-collapse:collapse;border:var(--stroke-rule) solid var(--rule);background:var(--surface-raised)}
+.cmpq-table thead th{background:var(--panel);color:var(--on-panel);font-family:var(--font-display);font-weight:500;font-size:1.0625rem;line-height:1.2;text-align:left;vertical-align:bottom;padding:var(--space-3) var(--space-2);border-left:var(--stroke-hairline) solid var(--rule)}
+.cmpq-table tbody th{background:var(--tint);color:var(--ink);font-family:var(--font-display);font-weight:600;font-size:1.0625rem;line-height:1.25;text-align:left;padding:var(--space-2) var(--space-2);border-top:var(--stroke-hairline) solid var(--rule)}
+.cmpq-table td{vertical-align:top;padding:var(--space-2) var(--space-2) var(--space-3);font-size:15px;line-height:1.35;color:var(--ink);border-top:var(--stroke-hairline) solid var(--rule);border-left:var(--stroke-hairline) solid var(--rule);overflow-wrap:break-word;hyphens:manual}
+.cmpq-table thead th:first-child,.cmpq-table td:first-child{border-left:0}
+.ins-cmp .cmp-table{border:var(--stroke-rule) solid var(--rule)}
+.ins-cmp .table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse}
+.ins-item .prose:has(.ins-cmp){max-width:none}
+.ins-item .prose:has(.ins-cmp) > :not(.ins-cmp){max-width:var(--measure-text)}
+.ins-cmp .table th,.ins-cmp .table td{padding:var(--space-3) 14px;border:var(--stroke-hairline) solid var(--rule);background:var(--surface-raised);font-size:1rem;line-height:1.4}
+.ins-cmp .table thead th,.ins-cmp .table thead td{background:var(--panel);color:var(--on-panel);font-size:1.25rem;line-height:1.2;white-space:nowrap;vertical-align:bottom}
+.ins-cmp .table thead td{width:19%}
+.ins-cmp .table tbody th{background:var(--tint);color:var(--ink);font-family:var(--font-display);font-size:1.0625rem;font-weight:600;letter-spacing:0;text-transform:none;white-space:normal;padding-top:var(--space-3)}
+
+/* Insights library grouped by subject: Planning, Products, Global */
+.ins-groups{display:grid;gap:var(--space-7)}
+.ins-group{display:grid;gap:var(--space-4)}
+.ins-group[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -1119,13 +1146,12 @@ const LANDSCAPE = [
 const INSIGHT_TOPICS = [
   { id: "all", name: "All" },
   { id: "planning", name: "Planning" },
-  { id: "sif", name: "SIF" },
-  { id: "pms-aif", name: "PMS and AIF" },
-  { id: "global", name: "GIFT City and NRI" }
+  { id: "products", name: "Products" },
+  { id: "global", name: "Global" }
 ];
 const INSIGHTS = [
   { id: "what-we-do", topic: "planning", date: "November 2026",
-    title: "What a wealth firm does, in plain words",
+    title: "What a wealth firm does",
     summary: "Your money sits in many places. Someone should look at all of it together.",
     paras: [
       "Most families hold their wealth in pieces: land, the business, gold, deposits, a few funds. Each piece was a sound decision at the time. Rarely does anyone look at all of it together.",
@@ -1133,51 +1159,13 @@ const INSIGHTS = [
       "We are a distributor. Product providers pay us commission, which we disclose before you invest. We do not give investment advice."
     ],
     foot: "This note is for education. It is not investment advice or a recommendation." },
-  { id: "what-is-a-sif", topic: "sif", date: "November 2026",
-    title: "What is a SIF?",
-    summary: "A category between mutual funds and PMS, from ₹10 lakh.",
-    paras: [
-      "A Specialized Investment Fund (SIF) is a category SEBI opened on 1 April 2025. It sits between a mutual fund and a PMS. Like a mutual fund, it is a pooled fund run by a fund house under SEBI’s mutual fund rules.",
-      "Unlike a regular mutual fund, a SIF may take limited short positions through derivatives, up to 25% of its net assets. That lets it aim to gain when prices fall as well as when they rise. The same flexibility adds risk.",
-      "The minimum is ₹10 lakh per investor, counted across all SIF strategies of one fund house. Some strategies allow redemption daily; others only once or twice a week. A SIF suits families who already understand mutual funds and can accept wider swings."
-    ],
-    source: "Source: SEBI circular on Specialized Investment Funds, 27 February 2025. Position as of November 2026.",
-    foot: "Investments in Specialized Investment Funds are subject to market risks. Read all scheme-related documents carefully. This note is for education. It is not investment advice or a recommendation." },
-  { id: "four-routes", topic: "pms-aif", date: "November 2026",
-    title: "Mutual fund, SIF, PMS, AIF: four routes compared",
-    summary: "The same four questions, asked of each route.",
-    table: {
-      head: ["", "Mutual fund", "SIF", "PMS", "AIF"],
-      rows: [
-        ["Minimum", "None set by SEBI", "₹10 lakh", "₹50 lakh", "₹1 crore"],
-        ["You hold", "Units of a pooled fund", "Units of a pooled fund", "Securities in your own name", "Units of a private fund"],
-        ["Offered to", "The public", "The public, above the minimum", "Individual clients", "Private placement only"],
-        ["Getting out", "Usually any business day", "Daily to weekly", "As your agreement sets out", "Often after several years"]
-      ]
-    },
-    paras: [
-      "Each step up brings more flexibility for the manager and less liquidity for you. None is better in itself; each fits a different need and temperament.",
-      "New SEBI regulations for portfolio managers take effect on 1 April 2027. The ₹50 lakh minimum for PMS stays."
-    ],
-    source: "Source: SEBI regulations for mutual funds, portfolio managers and alternative investment funds. Position as of November 2026.",
-    foot: "Mutual fund investments are subject to market risks, read all scheme related documents carefully. This note is for education. It is not investment advice or a recommendation." },
-  { id: "gift-city", topic: "global", date: "November 2026",
-    title: "GIFT City in plain words",
-    summary: "India’s international financial centre, and what it changes for families.",
-    paras: [
-      "GIFT City, in Gujarat, is home to India’s International Financial Services Centre. For foreign-exchange purposes it is treated as outside India, so money there moves in foreign currency, usually US dollars. One authority, IFSCA, regulates the funds set up there.",
-      "NRIs can invest from their overseas accounts without converting into rupees. Resident Indians can invest too, within the RBI’s Liberalised Remittance Scheme limit of USD 250,000 per person each financial year.",
-      "Minimums are often higher than for mutual funds in India, and the tax treatment differs. GIFT City is one route among several, not a replacement for the others."
-    ],
-    source: "Source: IFSCA; RBI Liberalised Remittance Scheme. Position as of November 2026.",
-    foot: "This note is for education. It is not investment advice or a recommendation. Please consult your tax professional." },
   { id: "concentration", topic: "planning", date: "November 2026",
     title: "Why concentration matters",
     summary: "Most wealth is built in one or two assets. Keeping it takes a wider base.",
     paras: [
       "Many business families hold most of their wealth in two places: the business and property. Both have served them well. Both are also slow to sell, and both often depend on the same local economy.",
       "Concentration is not a mistake. It is how most wealth is first built. The question is what the family would need if one of those assets had a difficult few years.",
-      "A portfolio spread across asset types, with part of it easy to reach, gives a family choices when it needs them. The Wealth Constellation on our home page shows your own picture in a minute."
+      "A portfolio spread across asset types, with part of it easy to reach, gives a family choices when it needs them. Our first conversation with every family starts with that whole picture."
     ],
     foot: "This note is for education. It is not investment advice or a recommendation." },
   { id: "insurance", topic: "planning", date: "November 2026",
@@ -1188,7 +1176,66 @@ const INSIGHTS = [
       "Products that mix the two can be harder to compare and harder to exit. Tavishi Wealth keeps them apart. We offer pure investment products only, and we never present insurance as an investment.",
       "If your family needs protection, treat it as its own decision, with its own conversation."
     ],
-    foot: "This note is for education. It is not investment advice or a recommendation." }
+    foot: "This note is for education. It is not investment advice or a recommendation." },
+  { id: "four-routes", topic: "products", date: "November 2026",
+    title: "Mutual fund, SIF, PMS, AIF: four routes compared",
+    summary: "The same four questions, asked of each route.",
+    table: {
+      head: ["", "Mutual fund", "SIF", "PMS", "AIF"],
+      rows: [
+        ["Minimum", "None set by SEBI", "₹10 lakh", "₹50 lakh", "₹1 crore"],
+        ["You hold", "Units of a pooled fund", "Units of a pooled fund", "Securities in your own name", "Units of a private fund"],
+        ["Offered to", "The public", "The public, above the minimum", "Each client, under a separate agreement", "Private placement only"],
+        ["Getting out", "Usually any business day", "Daily, weekly or less often", "As your agreement sets out", "Often after several years"]
+      ]
+    },
+    paras: [
+      "Each step up brings more flexibility for the manager and less liquidity for you. None is better in itself; each fits a different need and temperament."
+    ],
+    source: "Source: SEBI regulations for mutual funds, portfolio managers and alternative investment funds. Position as of November 2026.",
+    foot: "Mutual fund investments are subject to market risks, read all scheme related documents carefully. This note is for education. It is not investment advice or a recommendation." },
+  { id: "what-is-a-sif", topic: "products", date: "November 2026",
+    title: "What is a SIF?",
+    summary: "A category between mutual funds and PMS, from ₹10 lakh.",
+    paras: [
+      "A Specialized Investment Fund (SIF) is a category SEBI opened on 1 April 2025. It sits between a mutual fund and a PMS. Like a mutual fund, it is a pooled fund run by a fund house under SEBI’s mutual fund rules.",
+      "Unlike a regular mutual fund, a SIF may take limited short positions through derivatives, up to 25% of its net assets. That lets it aim to gain when prices fall as well as when they rise. The same flexibility adds risk.",
+      "The minimum is ₹10 lakh per investor, counted across all SIF strategies of one fund house. Depending on the strategy, you can redeem daily, weekly or less often, and some ask for up to 15 working days’ notice. A SIF suits families who already understand mutual funds and can accept wider swings."
+    ],
+    source: "Source: SEBI circular on Specialized Investment Funds, 27 February 2025. Position as of November 2026.",
+    foot: "Investments in Specialized Investment Funds are subject to market risks. Read all scheme-related documents carefully. This note is for education. It is not investment advice or a recommendation." },
+  { id: "what-is-a-pms", topic: "products", date: "November 2026",
+    title: "What is a PMS?",
+    summary: "A portfolio run for you alone, held in your own name, from ₹50 lakh.",
+    paras: [
+      "Portfolio Management Services (PMS) are offered by portfolio managers registered with SEBI. A PMS does not pool money. Each client has a separate portfolio, and the securities bought for it are held in the client’s own demat account.",
+      "In a discretionary PMS, the portfolio manager decides what to buy and sell, within the strategy set out in your agreement. In a non-discretionary PMS, the manager acts only on your directions. Fees are set out in the agreement and may be a fixed fee, a fee linked to performance, or both.",
+      "Because the securities are yours, gains on each sale and any dividends are taxed in your hands, as if you had invested directly. The minimum investment is ₹50 lakh.",
+      "Tavishi Wealth distributes the services of SEBI-registered portfolio managers. It does not manage portfolios itself."
+    ],
+    source: "Source: SEBI (Portfolio Managers) Regulations, 2020. Position as of November 2026.",
+    foot: "Investments in the securities market are subject to market risks. Read all related documents carefully before investing. This note is for education. It is not investment advice or a recommendation." },
+  { id: "what-is-an-aif", topic: "products", date: "November 2026",
+    title: "What is an AIF?",
+    summary: "A privately pooled fund, usually from ₹1 crore, often for several years.",
+    paras: [
+      "An Alternative Investment Fund (AIF) is a privately pooled fund registered with SEBI. It raises money from a limited number of investors through private placement, never through a public offer, and invests according to its stated strategy.",
+      "SEBI groups AIFs into three categories. Category I includes venture capital, SME and infrastructure funds. Category II includes private equity and private credit funds. Category III follows more complex trading strategies and may use derivatives and borrowing.",
+      "Category I and II funds are closed-ended, with a minimum tenure of three years, so money is usually committed for several years. Category III funds may be open-ended or closed-ended. The minimum is ₹1 crore for most investors, and the tax treatment differs by category.",
+      "AIFs are offered only by private placement. Tavishi Wealth introduces them to eligible investors in a private conversation."
+    ],
+    source: "Source: SEBI (Alternative Investment Funds) Regulations, 2012. Position as of November 2026.",
+    foot: "Investments in the securities market are subject to market risks. Read all related documents carefully before investing. This note is for education. It is not investment advice or a recommendation." },
+  { id: "gift-city", topic: "global", date: "November 2026",
+    title: "GIFT City, explained",
+    summary: "India’s international financial centre, and what it changes for families.",
+    paras: [
+      "GIFT City, in Gujarat, is home to India’s International Financial Services Centre. For foreign-exchange purposes it is treated as outside India, so money there moves in foreign currency, usually US dollars. One authority, IFSCA, regulates the funds set up there.",
+      "NRIs can invest from their overseas accounts without converting into rupees. Resident Indians can invest too, within the RBI’s Liberalised Remittance Scheme limit of USD 250,000 per person each financial year.",
+      "Minimums are often higher than for mutual funds in India, and the tax treatment differs. GIFT City is one route among several, not a replacement for the others."
+    ],
+    source: "Source: IFSCA; RBI Liberalised Remittance Scheme. Position as of November 2026.",
+    foot: "This note is for education. It is not investment advice or a recommendation. Please consult your tax professional." }
 ];
 
 /* ---------- Content: NRI & Global ---------- */
@@ -2073,10 +2120,21 @@ function viewConversation() {
     "</div></section>" + secInsightsLibrary();
 }
 
+/* Insight tables: the full table on wide screens; on phones, one block per question with the routes side by side. */
+function insightCompareHTML(head, rows) {
+  var full = compareHTML(head, rows), table = full.slice(0, full.indexOf('<div class="cmp-stack">'));
+  var cols = head.slice(1);
+  return '<div class="ins-cmp">' + table + '<div class="cmp-stack cmpq"><table class="cmpq-table"><thead><tr>' +
+    cols.map(function (h) { return '<th scope="col">' + h + "</th>"; }).join("") + "</tr></thead>" +
+    rows.map(function (r) {
+      return '<tbody><tr><th scope="rowgroup" colspan="' + cols.length + '">' + r[0] + "</th></tr><tr>" +
+        r.slice(1).map(function (c) { return "<td>" + c + "</td>"; }).join("") + "</tr></tbody>";
+    }).join("") + "</table></div></div>";
+}
 function insightBodyHTML(n) {
   var out = "";
   if (n.table) {
-    out += compareHTML(n.table.head, n.table.rows);
+    out += insightCompareHTML(n.table.head, n.table.rows);
   }
   out += n.paras.map(function (p) { return "<p>" + p + "</p>"; }).join("");
   if (n.source) out += '<p class="caption">' + n.source + "</p>";
@@ -2085,9 +2143,9 @@ function insightBodyHTML(n) {
 }
 function insightItemHTML(n) {
   var topic = INSIGHT_TOPICS.find(function (t) { return t.id === n.topic; });
-  return '<div class="acc-item" data-open="false" data-topic-id="' + n.topic + '" id="insight-' + n.id + '">' +
-    '<h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="ins-' + n.id + '" id="ins-' + n.id + '-btn">' +
-      '<span class="acc-title">' + n.title + '</span><span class="acc-meta">' + topic.name + " · " + n.date + '</span><span class="acc-ico" aria-hidden="true"></span></button></h3>' +
+  return '<div class="acc-item ins-item" data-open="false" data-topic-id="' + n.topic + '" id="insight-' + n.id + '">' +
+    '<h4><button class="acc-btn" type="button" aria-expanded="false" aria-controls="ins-' + n.id + '" id="ins-' + n.id + '-btn">' +
+      '<span class="acc-title">' + n.title + '</span><span class="acc-sum">' + n.summary + '</span><span class="acc-meta">' + n.date + '</span><span class="acc-ico" aria-hidden="true"></span></button></h4>' +
     '<div class="acc-panel" id="ins-' + n.id + '" role="region" aria-labelledby="ins-' + n.id + '-btn"><div><div class="acc-body" style="max-width:none"><div class="prose">' + insightBodyHTML(n) + "</div></div></div></div></div>";
 }
 function secInsightsLibrary() {
@@ -2096,7 +2154,12 @@ function secInsightsLibrary() {
       "<p>Short notes from Tavishi Wealth. Each one explains; none of them recommends.</p>" +
       '<fieldset><legend class="sr-only">Filter by subject</legend><div class="filters" id="ins-filters">' +
         INSIGHT_TOPICS.map(function (t, i) { return choiceHTML("ins-topic", t.id, t.name, i === 0); }).join("") + "</div></fieldset></div>" +
-    '<div class="rows" data-acc id="ins-list">' + INSIGHTS.map(insightItemHTML).join("") + "</div></div></section>";
+    '<div class="ins-groups" data-acc id="ins-list">' + INSIGHT_TOPICS.slice(1).map(function (t) {
+      var notes = INSIGHTS.filter(function (n) { return n.topic === t.id; });
+      if (!notes.length) return "";
+      return '<div class="ins-group" data-topic-id="' + t.id + '" role="group" aria-labelledby="ins-g-' + t.id + '"><h3 class="label ins-group-label" id="ins-g-' + t.id + '">' + t.name + "</h3>" +
+        '<div class="rows">' + notes.map(insightItemHTML).join("") + "</div></div>";
+    }).join("") + "</div></div></section>";
 }
 
 /* ---------- Tool pages ---------- */
@@ -3185,7 +3248,7 @@ function initConversation() {
   var filters = $("#ins-filters");
   if (filters) filters.addEventListener("change", function (e) {
     if (e.target.name !== "ins-topic") return;
-    $$("#ins-list .acc-item").forEach(function (it) { it.hidden = e.target.value !== "all" && it.getAttribute("data-topic-id") !== e.target.value; });
+    $$("#ins-list .ins-group").forEach(function (g) { g.hidden = e.target.value !== "all" && g.getAttribute("data-topic-id") !== e.target.value; });
   });
   renderEnquiry(false);
 }
@@ -3636,7 +3699,7 @@ start();
     document.documentElement.classList.toggle("is-refined",on);
     if(on){var cz=document.querySelector("#concierge");if(cz&&!cz.hidden&&typeof closeConcierge==="function")closeConcierge();}
     var phone=window.innerWidth<900;
-    if(on&&phone) Array.prototype.forEach.call(document.querySelectorAll("[data-acc] .acc-item[data-open='true']"),function(it){setAcc(it,false);});
+    if(on&&phone) Array.prototype.forEach.call(document.querySelectorAll("[data-acc] .acc-item[data-open='true']:not(.ins-item)"),function(it){setAcc(it,false);});
     var comp=document.querySelector(".site-footer .compliance");
     if(on&&comp&&!comp.querySelector(".compliance-more")){
       var ps=Array.prototype.slice.call(comp.children);
